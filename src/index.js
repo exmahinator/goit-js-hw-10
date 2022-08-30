@@ -32,24 +32,6 @@ function searchCountry(event) {
   fetchCountries(event.target.value.trim());
 }
 
-// function fetchCountries(name) {
-//   return fetch(`${BASIC_URL}/name/${name}?${searchOptions}`)
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error(response.status);
-//       }
-//       return response.json();
-//     })
-//     .then(data => {
-//       pageMarkup(data);
-//     })
-//     .catch(() => {
-//       Notiflix.Notify.failure('Oops, there is no country with that name', {
-//         timeout: 3000,
-//       });
-//     });
-// }
-
 export function pageMarkup(data) {
   if (data.length > 10) {
     Notiflix.Notify.info(
@@ -65,7 +47,7 @@ export function pageMarkup(data) {
       .map(({ name, flags }) => {
         return `<li class="country-item"><img src="${flags.svg}"
              alt="Flag of ${name}" width="100">
-             <p class="country-name">${name.official}</p></li>`;
+             <p class="country-name-list">${name.official}</p></li>`;
       })
       .join('');
     markupUlRef.insertAdjacentHTML('beforeend', listOfCountriesMarkup);
@@ -76,7 +58,7 @@ export function pageMarkup(data) {
       const values = Object.values(languages).join(', ');
       return `<img src="${flags.svg}"
            alt="Flag of ${name.official}" width="100">
-           <p>${name.official}</p>
+           <p class="country-name-block">${name.official}</p>
            <p>Capital: ${capital}</p>
            <p>Population: ${population}</p>
            <p>Languages: ${values}</p>`;
